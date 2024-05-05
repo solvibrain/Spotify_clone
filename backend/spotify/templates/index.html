@@ -17,14 +17,15 @@
         <!-- Welcome User -->
         <div class="sidebar-section">
             <span style="margin-left: 14px;" class="sidebar-link-icon">👤</span>
-            <b>Welcome, user</b>
+            <b>Welcome,{{user.username}} </b>
             <br>
             <br>
-
+           {% if user.is_authenticated %}
             <a href="#">
                 <span class="sidebar-link-icon">↪️</span>
                 <b>Logout</b>
             </a>
+            {% endif %}
         </div>
 
         <!-- Top section of the sidebar -->
