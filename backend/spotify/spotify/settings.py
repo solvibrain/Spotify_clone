@@ -139,3 +139,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Here this is for using Custom BAckend in The Project 
+AUTHENTICATION_BACKENDS = (
+    'music.backends.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)

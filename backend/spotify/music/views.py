@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+
+from.backends import CustomAuthBackend # This is for using Custom Authentication that I can use both email and username for authentication
+
 # Create your views here.
 @login_required(login_url="/login")
 def index(request):
@@ -49,8 +52,11 @@ def user_login(request):
         username = request.POST["username"]
         password = request.POST["password"]
 
-        user = auth.authenticate(username = username, password = password)
+        # user = auth.authenticate(username = username, password = password)
+        # Implemented authentication using CustomBackend using both username and email , Importing CustomBackend from Backends.py file 
+        user = CustomAuthBackend().authenticate(request, username=username, password=password)
         if user is not None:
+            user.backend = 'music.backends.CustomAuthBackend'
             auth.login(request,user)
             return redirect("/")
         else:
